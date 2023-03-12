@@ -1,0 +1,5 @@
+pyperclip
+xlrd
+pyautogui==0.9.50
+opencv-python -i https://pypi.tuna.tsinghua.edu.cn/simple
+pillow
