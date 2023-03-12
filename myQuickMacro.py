@@ -12,7 +12,7 @@ def mouseClick(clickTimes,lOrR,img,reTry):
         while True:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
                 break
             print("未找到匹配图片,0.1秒后重试")
             time.sleep(0.1)
@@ -20,14 +20,14 @@ def mouseClick(clickTimes,lOrR,img,reTry):
         while True:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
             time.sleep(0.1)
     elif reTry > 1:
         i = 1
         while i < reTry + 1:
             location=pyautogui.locateCenterOnScreen(img,confidence=0.9)
             if location is not None:
-                pyautogui.click(location.x,location.y,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
+                pyautogui.click(location.x/2,location.y/2,clicks=clickTimes,interval=0.2,duration=0.2,button=lOrR)
                 print("重复")
                 i += 1
             time.sleep(0.1)
@@ -121,8 +121,10 @@ def mainWork(img):
         elif cmdType.value == 4.0:
             inputValue = sheet1.row(i)[1].value
             pyperclip.copy(inputValue)
-            pyautogui.hotkey('ctrl','v')
-            time.sleep(0.5)
+            pyautogui.keyDown('command')
+            pyautogui.keyDown('v')
+            pyautogui.keyUp('command')
+            pyautogui.keyUp('v')
             print("输入:",inputValue)                                        
         #5代表等待
         elif cmdType.value == 5.0:
@@ -134,12 +136,12 @@ def mainWork(img):
         elif cmdType.value == 6.0:
             #取图片名称
             scroll = sheet1.row(i)[1].value
+            time.sleep(0.5)
             pyautogui.scroll(int(scroll))
             print("滚轮滑动",int(scroll),"距离")                      
         i += 1
 
 if __name__ == '__main__':
-    print(111)
     file = 'cmd.xls'
     #打开文件
     wb = xlrd.open_workbook(filename=file)
